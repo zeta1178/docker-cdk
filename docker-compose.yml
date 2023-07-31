@@ -9,4 +9,8 @@ services:
     volumes:
       - ../app:/home/app
     # Entrypoint when we `ssh` to container
-    command: [/bin/bash]
+    command: [/bin/bash]    
+    networks:
+      - net
+networks:
+  net:  
