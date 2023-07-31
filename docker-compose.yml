@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  # Our container for CDK command
+  aws-cdk:
+    # Build our Dockerfile
+    build: .
+    # Make sure files are syncd to ../app folder 
+    #  and docker container /home/app folder
+    volumes:
+      - ../app:/home/app
+    # Entrypoint when we `ssh` to container
+    command: [/bin/bash]
