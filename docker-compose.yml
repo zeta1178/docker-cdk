@@ -8,6 +8,9 @@ services:
     #  and docker container /home/app folder
     volumes:
       - ../app:/home/app
+    #use local cred file
+    env_file:
+      - .env.docker
     # Entrypoint when we `ssh` to container
     command: [/bin/bash]    
     networks:

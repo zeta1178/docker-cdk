@@ -10,8 +10,19 @@ In your /docker folder
 Start docker container in the background
 
 ```
+#sso login
+pip install aws-export-credentials
+aws sso login
+aws-export-credentials --profile Admin-MikeCruz --env > .env.docker
+
 docker builder prune (removes images cache)
 docker build --progress=plain --no-cache . (verbose building)
+
+#local docker run
+docker run --env-file .env.docker -dit aws-cdk bash
+docker exec -ti magical_euclid bash
+
+
 docker compose up -d
 ```
 Docker container commands
