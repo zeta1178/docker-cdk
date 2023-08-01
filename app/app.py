@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import settings
 
 import aws_cdk as cdk
 

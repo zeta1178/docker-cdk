@@ -25,4 +25,13 @@ RUN pip install --upgrade pip && \
 # Install cdk
 RUN npm install -g aws-cdk
 RUN cdk --version
+RUN ls && echo $PWD 
+
+COPY ./app /home/app
+WORKDIR home/app
+#RUN ls && echo $PWD 
+
+RUN pip install -r requirements.txt
+RUN cdk ls
+
 ENTRYPOINT []

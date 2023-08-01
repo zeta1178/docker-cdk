@@ -10,13 +10,15 @@ In your /docker folder
 Start docker container in the background
 
 ```
+docker builder prune (removes images cache)
+docker build --progress=plain --no-cache . (verbose building)
 docker compose up -d
 ```
 Docker container commands
 SSH into your docker container
 
 ```
-docker compose run -dit --rm aws-cdk /bin/bash
+docker compose run -dit aws-cdk /bin/bash
 ```
 Check CDK is installed (it should result in some cdk help)
 
