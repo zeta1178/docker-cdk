@@ -14,6 +14,7 @@ Start docker container in the background
 pip install aws-export-credentials
 aws sso login
 aws-export-credentials --profile Admin-MikeCruz --env > .env.docker
+docker run -dit docker-cdk-aws-cdk bash
 
 docker builder prune (removes images cache)
 docker build --progress=plain --no-cache . (verbose building)
