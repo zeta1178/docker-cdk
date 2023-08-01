@@ -16,7 +16,7 @@ Docker container commands
 SSH into your docker container
 
 ```
-docker compose run -it --rm aws-cdk /bin/bash
+docker compose run -dit --rm aws-cdk /bin/bash
 ```
 Check CDK is installed (it should result in some cdk help)
 
