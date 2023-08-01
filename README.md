@@ -12,19 +12,24 @@ Start docker container in the background
 ```
 #sso login
 pip install aws-export-credentials
-aws sso login
+#aws configure sso 
+#aws sso logout
+aws sso login --profile Admin-MikeCruz
 aws-export-credentials --profile Admin-MikeCruz --env > .env.docker
 
 #Not Used
 #docker run -dit docker-cdk-aws-cdk bash
 
+# using docker compose
 docker compose up -d
 docker exec -ti docker-cdk-aws-cdk-1 bash
 
+#
 docker builder prune (removes images cache)
-docker build --progress=plain --no-cache . (verbose building)
 
 #local docker run
+docker build --progress=plain --no-cache . (verbose building)
+docker build --progress=plain --no-cache . --tag=aws-cdk:latest (verbose building2)
 docker run --env-file .env.docker -dit aws-cdk bash
 docker exec -ti magical_euclid bash
 
