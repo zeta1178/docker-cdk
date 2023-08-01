@@ -5,6 +5,7 @@ import settings
 import aws_cdk as cdk
 
 from app.app_stack import AppStack
+from app.lambda_stack import LambdaStack
 from aws_cdk import App, Tags, Environment
 
 env_main = cdk.Environment(
@@ -18,5 +19,7 @@ app_stack= AppStack(
     "AppStack",
     env=env_main
     )
+
+Tags.of(app).add("ApplicationGroup", "MultiAccount2021")
 
 app.synth()
