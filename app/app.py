@@ -20,6 +20,13 @@ app_stack= AppStack(
     env=env_main
     )
 
-Tags.of(app).add("ApplicationGroup", "MultiAccount2021")
+lambda_stack= LambdaStack(
+    app, 
+    "LambdaStack",
+    env=env_main
+    )
+
+Tags.of(app_stack).add("ApplicationGroup", "MultiAccount2021")
+Tags.of(lambda_stack).add("ApplicationGroup", "MultiAccount2021")
 
 app.synth()

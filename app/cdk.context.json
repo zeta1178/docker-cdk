@@ -1,0 +1,3 @@
+{
+  "ssm:account=992690408789:parameterName=/cert/sns_arn:region=us-east-1": "arn:aws:sns:us-east-1:992690408789:AppStack-NotificationTopic7BD46E29-3ser255uf61K"
+}

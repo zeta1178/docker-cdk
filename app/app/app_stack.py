@@ -2,6 +2,7 @@ from aws_cdk import (
     Stack,
     aws_iam,
     aws_sns,
+    aws_sns_subscriptions,
     aws_ssm,
     aws_dynamodb,
     App, Aws, CfnOutput, Duration, RemovalPolicy, Stack
@@ -27,6 +28,9 @@ class AppStack(Stack):
         topic = aws_sns.Topic(self, "Notification Topic",
             display_name="Certificate Expiry Topic"
         )
+
+        # creates an SNS topic subscription
+        topic.add_subscription(aws_sns_subscriptions.EmailSubscription("michaelcruz@aim.com"))
 
         # create an SSM parameter for SNS ARN
         sns_arn_param = aws_ssm.StringParameter(

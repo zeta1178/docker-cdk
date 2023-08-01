@@ -14,7 +14,7 @@ from constructs import Construct
 class LambdaStack(Stack):
 
     # def __init__(self, scope: Construct, construct_id: str, props, referenced_key: kms.IKey ,**kwargs) -> None:
-    def __init__(self, scope: Construct, construct_id: str, props, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         # lookup sns_arn
@@ -48,6 +48,13 @@ class LambdaStack(Stack):
         )
         perm_statement_vpc.add_resources("*") #This adds to the Lambda function a policy granting access
 
+        # permissions for dynamodb for Lambda Function
+        perm_statement_ddb = iam.PolicyStatement()
+        perm_statement_ddb.add_actions(
+            "dynamodb:*",
+        )
+        perm_statement_ddb.add_resources("*") #This adds to the Lambda function a policy granting access
+
         # modify with existing VPC ID
         # referenced_vpc=ec2.Vpc.from_lookup(self, "VPC",vpc_id = 'vpc-09fdcfa8364dbd334' )
 
@@ -55,13 +62,29 @@ class LambdaStack(Stack):
         # referenced_subnet=ec2.SubnetSelection(subnets = ['subnet-0516d62225de0912f'])
         # referenced_subnet=ec2.SubnetSelection(subnet_group_name="Private")
 
-        #creates the lambda function
-        lambda_Fn = aws_lambda.PythonFunction(
-            self, "excel lambda",
-            entry="./lambda",
+        #creates the lambda function for dynamodb put
+        lambda_Fn = aws_lambda.Function(
+            self, 
+            "dynamodb put lambda",
+            code=aws_lambda.AssetCode('lambda_ddb'),
             runtime=aws_lambda.Runtime.PYTHON_3_11,
-            index="lambda_function.py",
-            handler="lambda_handler",
+            handler='lambda_function.lambda_handler',
+            memory_size=512,
+            timeout=Duration.seconds(60),
+            # vpc=referenced_vpc,
+            # vpc_subnets=referenced_subnet, 
+            environment={
+            #   "SNS_TOPIC_ARN" : sns_arn_param ,
+            },
+        )
+
+        #creates the lambda function for sns
+        lambda_Fn2 = aws_lambda.Function(
+            self, 
+            "sns lambda",
+            code=aws_lambda.AssetCode('lambda_sns'),
+            runtime=aws_lambda.Runtime.PYTHON_3_11,
+            handler='lambda_function.lambda_handler',
             memory_size=512,
             timeout=Duration.seconds(60),
             # vpc=referenced_vpc,
@@ -75,3 +98,9 @@ class LambdaStack(Stack):
         lambda_Fn.add_to_role_policy(perm_statement_ssm) #This adds the policy to the role.
         lambda_Fn.add_to_role_policy(perm_statement_vpc) #This adds the policy to the role.
         lambda_Fn.add_to_role_policy(perm_statement_sns) #This adds the policy to the role.
+        lambda_Fn.add_to_role_policy(perm_statement_ddb) #This adds the policy to the role.
+
+        lambda_Fn2.add_to_role_policy(perm_statement_ssm) #This adds the policy to the role.
+        lambda_Fn2.add_to_role_policy(perm_statement_vpc) #This adds the policy to the role.
+        lambda_Fn2.add_to_role_policy(perm_statement_sns) #This adds the policy to the role.
+        lambda_Fn2.add_to_role_policy(perm_statement_ddb) #This adds the policy to the role.
