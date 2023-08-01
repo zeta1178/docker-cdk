@@ -8,6 +8,8 @@ services:
     #  and docker container /home/app folder
     volumes:
       - ../app:/home/app
+      #keep open 
+    tty: true
     #use local cred file
     env_file:
       - .env.docker
