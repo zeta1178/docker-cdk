@@ -24,12 +24,10 @@ RUN pip install --upgrade pip && \
     pip install --upgrade awscli
 # Install cdk
 RUN npm install -g aws-cdk
-RUN cdk --version
-RUN ls && echo $PWD 
+RUN cdk --version 
 
 COPY ./app /home/app
 WORKDIR home/app
-#RUN ls && echo $PWD 
 
 RUN pip install -r requirements.txt
 RUN cdk ls
