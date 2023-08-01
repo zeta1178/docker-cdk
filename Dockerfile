@@ -49,9 +49,11 @@ RUN npm install -g aws-cdk
 RUN cdk --version 
 
 WORKDIR root/
-RUN mkdir .aws
+RUN mkdir .aws/sso/cache
 COPY ./config/config .aws/config
-COPY ./config/credentials .aws/credentials
+#COPY ./config/credentials .aws/credentials
+COPY ./config/sso/cache/botocore-client-id-us-east-1.json .aws/sso/cache/botocore-client-id-us-east-1.json
+COPY ./config/sso/cache/21502f4a281fa759740478902f86d074f0f4af62.json .aws/sso/cache/21502f4a281fa759740478902f86d074f0f4af62.json
 #RUN aws sso login
 
 WORKDIR /home/app
