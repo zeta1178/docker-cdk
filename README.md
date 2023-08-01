@@ -37,6 +37,9 @@ Initialize a cdk project (python)
 
 ```
 cdk init sample-app --language python
+cdk ls
+#test awscli
+aws s3 ls --profile Admin-MikeCruz
 ```
 
 Locally you will have a folder with app files ready for creating AWS infrastructure with python CDK.
