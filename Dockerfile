@@ -26,6 +26,8 @@ RUN pip install --upgrade pip && \
 RUN npm install -g aws-cdk
 RUN cdk --version 
 
+RUN mkdir .aws
+COPY ./config/config /.aws/config
 COPY ./app /home/app
 WORKDIR home/app
 
