@@ -50,7 +50,7 @@ RUN cdk --version
 
 WORKDIR root/
 RUN mkdir -p .aws/sso/cache
-COPY ./config/config .aws/config
+#COPY ./config/config .aws/config
 #COPY ./config/credentials .aws/credentials
 
 WORKDIR /home/app
