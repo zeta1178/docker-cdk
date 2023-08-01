@@ -11,8 +11,8 @@ services:
     #keep open 
     tty: true
     #use local cred file
-    env_file:
-      - .env.docker
+    #env_file:
+    #  - .env.docker
     # Entrypoint when we `ssh` to container
     command: [/bin/bash]    
     networks:
