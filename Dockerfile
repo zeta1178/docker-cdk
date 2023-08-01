@@ -56,6 +56,6 @@ RUN mkdir -p .aws/sso/cache
 WORKDIR /home/app
 COPY ./app /home/app
 RUN pip install -r requirements.txt
-#RUN cdk deploy --all --profile Admin-MikeCruz
+RUN cdk deploy --all
 
 ENTRYPOINT []
