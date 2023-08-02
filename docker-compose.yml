@@ -19,7 +19,7 @@ services:
     env_file:
       - .env.docker
     # Entrypoint when we `ssh` to container
-    command: [/bin/bash]    
+    command: ["/bin/sh"]    
     networks:
       - net
 networks:
