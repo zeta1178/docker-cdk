@@ -3,16 +3,21 @@ services:
   # Our container for CDK command
   aws-cdk:
     # Build our Dockerfile
-    build: .
+    build:
+      context: . 
+      args:
+        - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+        - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+        - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
     # Make sure files are syncd to ../app folder 
     #  and docker container /home/app folder
     volumes:
       - ../app:/home/app
     #keep open 
-    tty: true
+    #tty: true
     #use local cred file
-    #env_file:
-    #  - .env.docker
+    env_file:
+      - .env.docker
     # Entrypoint when we `ssh` to container
     command: [/bin/bash]    
     networks:
