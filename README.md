@@ -22,7 +22,7 @@ aws-export-credentials --profile Admin-MikeCruz --env > .env.docker
 
 # using docker compose
 docker compose up -d
-docker exec -ti docker-cdk-aws-cdk-1 bash
+docker exec -ti docker-cdk-aws-cdk-1 bash (not needed if using command )
 
 #
 docker builder prune (removes images cache)
@@ -30,7 +30,7 @@ docker builder prune (removes images cache)
 #local docker run
 docker build --progress=plain --no-cache . (verbose building)
 docker build --progress=plain --no-cache . --tag=aws-cdk:latest (verbose building2)
-docker run --env-file .env.docker -dit aws-cdk bash
+docker run --env-file .env.docker -dit aws-cdk bash 
 docker exec -ti magical_euclid bash
 
 

@@ -3,6 +3,7 @@ sso_session = Session
 sso_account_id = 992690408789
 sso_role_name = AdministratorAccess
 region = us-east-1
+
 [sso-session Session]
 sso_start_url = https://d-9067a9310e.awsapps.com/start
 sso_region = us-east-1
