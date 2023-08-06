@@ -46,6 +46,7 @@ class AppStack(Stack):
             self, 
             "Table",
             table_name="cert_tracker2",
+            removal_policy=RemovalPolicy.DESTROY,
             partition_key=aws_dynamodb.Attribute(
                 name="arn", 
                 type=aws_dynamodb.AttributeType.STRING
