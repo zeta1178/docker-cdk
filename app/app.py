@@ -25,6 +25,7 @@ lambda_stack= LambdaStack(
     "LambdaStack",
     env=env_main
     )
+lambda_stack.add_dependency(app_stack)
 
 Tags.of(app_stack).add("ApplicationGroup", "MultiAccount2021")
 Tags.of(lambda_stack).add("ApplicationGroup", "MultiAccount2021")
