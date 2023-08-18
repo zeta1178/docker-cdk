@@ -2,6 +2,14 @@
 unset AWS_ACCESS_KEY_ID
 unset AWS_SECRET_ACCESS_KEY
 unset AWS_SESSION_TOKEN
+rm -f $PWD/role.txt
+ASSUME_ROLE_ARN=$1
+TEMP_ROLE=$(aws sts assume-role --role-arn $ASSUME_ROLE_ARN --role-session-name role | tee $PWD/role.txt)
+echo 'export AWS_ACCESS_KEY_ID=$(cat $PWD/role.txt | jq -r '.Credentials.AccessKeyId');'
+echo 'export AWS_SECRET_ACCESS_KEY=$(cat $PWD/role.txt | jq -r '.Credentials.SecretAccessKey');'
+echo 'export AWS_SESSION_TOKEN=$(cat $PWD/role.txt | jq -r '.Credentials.SessionToken');'
+
+### NOT USED ###
 #ASSUME_ROLE_ARN="arn:aws:iam::992690408789:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_AdministratorAccess_8773fea6ec8d21df"
 #TEMP_ROLE=$(aws sts assume-role --role-arn $ASSUME_ROLE_ARN --role-session-name role)
 #rm -f $PWD/role.txt
@@ -33,5 +41,5 @@ unset AWS_SESSION_TOKEN
 
 #aws sts assume-role --role-arn arn:aws:iam::992690408789:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_AdministratorAccess_8773fea6ec8d21df --role-session-name role
 
-export $(aws-export-credentials --env)
+#export $(aws-export-credentials --env)
 #eval $(aws-export-credentials --env-export)
